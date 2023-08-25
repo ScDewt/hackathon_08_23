@@ -1,6 +1,6 @@
 <?php
 
-namespace Scdewt\Hackathon0823\Connection;
+namespace Scdewt\Hackathon0823\DB;
 
 class Connection
 {
