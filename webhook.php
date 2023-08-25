@@ -11,7 +11,10 @@ try {
     // Create Telegram API object
     $telegram = new Longman\TelegramBot\Telegram($bot_api_key, $bot_username);
 
-    $telegram->addCommandsPath(__DIR__.'/src/Commands/');
+    $telegram->addCommandClass(\Scdewt\Hackathon0823\Command\StartCommand::class);
+    $telegram->addCommandClass(\Scdewt\Hackathon0823\Command\NameCommand::class);
+    $telegram->addCommandClass(\Scdewt\Hackathon0823\Command\TeamCommand::class);
+
 
     // Handle telegram webhook request
     $telegram->handle();
