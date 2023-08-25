@@ -47,6 +47,7 @@ class StartCommand extends UserCommand
         }
 
         $data = ['chat_id' => $chat_id];
+        $data["parse_mode"] = 'Markdown';
         $data['text'] = "Приветствую, " . $name . "!\nИспользуй /team чтобы присоединитья к команде. Пример: `/team facebook`";
 
         return Request::sendMessage($data);
