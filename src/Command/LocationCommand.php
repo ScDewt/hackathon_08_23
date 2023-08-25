@@ -42,7 +42,7 @@ class LocationCommand extends UserCommand
         $location = $message->getLocation();
 
         if (preg_match("~^(\d+(?:.\d+)?),? (\d+(?:.\d+)?)$~", $text, $matches)) {
-            $location = new Location(["longitude" => (float)  $matches[1], "latitude" => (float) $matches[2]]);
+            $location = new Location(["latitude" => (float)  $matches[1], "longitude" => (float) $matches[2]]);
         }
 
         if ($location !== null) {
@@ -52,8 +52,8 @@ class LocationCommand extends UserCommand
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':person_id', $user_id);
             $coords = json_encode([
-                $location->getLongitude(),
                 $location->getLatitude(),
+                $location->getLongitude(),
             ]);
             $stmt->bindParam(':coords', $coords);
             if (!$stmt->execute()) {
