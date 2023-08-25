@@ -9,7 +9,7 @@ if (empty($team)) {
 
 $conn = getConnection();
 
-$sql = "select * from main where team=?";
+$sql = "select * from main where team=:team";
 
 $stmt = $conn->prepare($sql);
 $stmt->bindParam(':team', $team);
