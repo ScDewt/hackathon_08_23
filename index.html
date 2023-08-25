@@ -94,7 +94,7 @@
                     if (!coords || coords[0] == null || !coords[1] == null) {
                         continue;
                     }
-                    const lng = coords?.[0], lat = coords?.[1];
+                    const lat = coords?.[0], lng = coords?.[1];
                     addPoint({ map, lat, lng, name: person_name })
                 }
             } else {
