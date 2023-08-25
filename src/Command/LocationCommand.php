@@ -35,6 +35,25 @@ class LocationCommand extends UserCommand
 
         $data = ['chat_id' => $chat_id];
 
+        if ($message->getLocation() !== null) {
+            $conn = Connection::getConnection();
+            $sql = "UPDATE main SET coords=:coords where person_id=:person_id";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':person_id', $user_id);
+            $coords = json_encode([
+                $message->getLocation()->getLongitude(),
+                $message->getLocation()->getLatitude(),
+            ]);
+            $stmt->bindParam(':coords', $coords);
+            $stmt->execute();
+
+
+            $data['text'] = 'Ваше местоположение принято';
+
+            return Request::sendMessage($data);
+        }
+
         $data['reply_markup'] = (new Keyboard(
             (new KeyboardButton('Share Location'))->setRequestLocation(true)
         ))
@@ -42,7 +61,7 @@ class LocationCommand extends UserCommand
             ->setResizeKeyboard(true)
             ->setSelective(true);
 
-        $data['text'] = 'Share your location:';
+        $data['text'] = 'Пришлите ваше местоположение:';
 
         return Request::sendMessage($data);
     }
