@@ -8,7 +8,7 @@ function getConnection()
     /** @var string $pass - Database password */
     $pass = 'hackathon';
     /** @var string $name - Database name */
-    $name = 'main';
+    $name = 'hackathon_08_23';
 
     /** @var string $dsn - Connection string */
     $dsn = "mysql:host=$host;dbname=$name;charset=utf8";
