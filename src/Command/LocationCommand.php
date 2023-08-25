@@ -41,9 +41,8 @@ class LocationCommand extends UserCommand
         $text = $message->getText(true);
         $location = $message->getLocation();
 
-        if (preg_match("~^\d+(.\d+)? \d+(.\d+)?$~", $text)) {
-            [$longitude, $latitude] = explode(" ", $text);
-            $location = new Location(["longitude" => $longitude, "latitude" => $latitude]);
+        if (preg_match("~^(\d+(?:.\d+)?),? (\d+(?:.\d+)?)$~", $text, $matches)) {
+            $location = new Location(["longitude" => (float)  $matches[1], "latitude" => (float) $matches[2]]);
         }
 
         if ($location !== null) {
