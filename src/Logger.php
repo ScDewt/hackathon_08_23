@@ -7,6 +7,6 @@ class Logger extends AbstractLogger
 {
     public function log($level, \Stringable|string $message, array $context = []): void
     {
-        file_put_contents("/var/log/hackathon.log", $level.": ".((string)$message));
+        file_put_contents("/var/log/hackathon.log", $level.": ".((string)$message), FILE_APPEND);
     }
 }
