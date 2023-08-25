@@ -20,6 +20,7 @@ try {
     $telegram->addCommandClass(\Scdewt\Hackathon0823\Command\StartCommand::class);
     $telegram->addCommandClass(\Scdewt\Hackathon0823\Command\NameCommand::class);
     $telegram->addCommandClass(\Scdewt\Hackathon0823\Command\TeamCommand::class);
+    $telegram->addCommandClass(\Scdewt\Hackathon0823\Command\LocationCommand::class);
 
 
     // Handle telegram webhook request
