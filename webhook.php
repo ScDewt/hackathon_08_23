@@ -8,6 +8,9 @@ $bot_api_key = 'your:bot_api_key';
 $bot_username = 'username_bot';
 
 try {
+    error_log("telegram: new message");
+    \Longman\TelegramBot\TelegramLog::initialize();
+
     // Create Telegram API object
     $telegram = new Longman\TelegramBot\Telegram($bot_api_key, $bot_username);
 
@@ -23,5 +26,5 @@ try {
 } catch (Longman\TelegramBot\Exception\TelegramException $e) {
     // Silence is golden!
     // log telegram errors
-     echo $e->getMessage();
+    error_log($e->getMessage());
 }
