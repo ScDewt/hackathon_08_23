@@ -1,17 +1,18 @@
 <?php
 
-// by default
-use App\Lib\PDOConnection;
+require "pdo.php";
 
-$status = STATUS_ACTIVE;
-$conn = PDOConnection::getConnection();
+$conn = getConnection();
 
-$sql = "INSERT INTO user (created, updated, status, name, hash, image_url) 
-                VALUES (now(), now(), :status, :name, :hash, :image_url)";
+$sql = "select * from main";
 
 $stmt = $conn->prepare($sql);
-$stmt->bindParam(':status', $status);
-$stmt->bindParam(':name', $name);
-$stmt->bindParam(':hash', $hash);
-$stmt->bindParam(':image_url', $imageUrl);
+//$stmt->bindParam(':status', $status);
+//$stmt->bindParam(':name', $name);
+//$stmt->bindParam(':hash', $hash);
+//$stmt->bindParam(':image_url', $imageUrl);
 $stmt->execute();
+
+$result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+var_dump($result);
