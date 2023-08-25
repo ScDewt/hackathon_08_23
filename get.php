@@ -25,6 +25,10 @@ try {
         throw new  Exception('Not found team in db');
     }
 
+    foreach ($data as $key => $value) {
+        $data[$key]['coords'] = json_decode($value['coords'], true);
+    }
+
     $result = [
         'status' => 'ok',
         'data' => $data,
