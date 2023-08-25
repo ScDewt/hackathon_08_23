@@ -6,6 +6,7 @@ use Longman\TelegramBot\Commands\UserCommand;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Request;
+use Longman\TelegramBot\TelegramLog;
 use Scdewt\Hackathon0823\DB\Connection;
 
 class StartCommand extends UserCommand
@@ -41,7 +42,9 @@ class StartCommand extends UserCommand
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':person_id', $user_id);
         $stmt->bindParam(':person_name', $name);
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            TelegramLog::error($stmt->errorInfo()[0]);
+        }
 
         $data = ['chat_id' => $chat_id];
         $data['text'] = "Приветствую, " . $name . "!";

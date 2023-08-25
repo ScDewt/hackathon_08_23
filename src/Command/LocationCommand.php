@@ -8,6 +8,7 @@ use Longman\TelegramBot\Entities\KeyboardButton;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Request;
+use Longman\TelegramBot\TelegramLog;
 use Scdewt\Hackathon0823\DB\Connection;
 
 class LocationCommand extends UserCommand
@@ -46,7 +47,9 @@ class LocationCommand extends UserCommand
                 $message->getLocation()->getLatitude(),
             ]);
             $stmt->bindParam(':coords', $coords);
-            $stmt->execute();
+            if (!$stmt->execute()) {
+                TelegramLog::error($stmt->errorInfo()[0]);
+            }
 
 
             $data['text'] = 'Ваше местоположение принято';

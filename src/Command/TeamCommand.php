@@ -6,6 +6,7 @@ use Longman\TelegramBot\Commands\UserCommand;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Request;
+use Longman\TelegramBot\TelegramLog;
 use Scdewt\Hackathon0823\DB\Connection;
 
 class TeamCommand extends UserCommand
@@ -40,7 +41,9 @@ class TeamCommand extends UserCommand
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':person_id', $user_id);
         $stmt->bindParam(':team', $team);
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            TelegramLog::error($stmt->errorInfo()[0]);
+        }
 
         $data = ['chat_id' => $chat_id];
         $data["text"] = "Вы приняты в " . $team;
