@@ -7,9 +7,12 @@ require __DIR__ . '/vendor/autoload.php';
 $bot_api_key = 'your:bot_api_key';
 $bot_username = 'username_bot';
 
+$logger = new \Scdewt\Hackathon0823\Logger();
+
 try {
-    error_log("telegram: new message");
-    \Longman\TelegramBot\TelegramLog::initialize();
+    \Longman\TelegramBot\TelegramLog::initialize($logger, $logger);
+    $logger->info("telegram: new message");
+
 
     // Create Telegram API object
     $telegram = new Longman\TelegramBot\Telegram($bot_api_key, $bot_username);
@@ -26,5 +29,5 @@ try {
 } catch (Longman\TelegramBot\Exception\TelegramException $e) {
     // Silence is golden!
     // log telegram errors
-    error_log($e->getMessage());
+    $logger->error($e->getMessage());
 }
