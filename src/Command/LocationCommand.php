@@ -33,6 +33,7 @@ class LocationCommand extends UserCommand
         $message = $this->getMessage();
 
         $chat_id = $message->getChat()->getId();
+        $user_id = $message->getFrom()->getId();
 
         $data = ['chat_id' => $chat_id];
 
