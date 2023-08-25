@@ -2,12 +2,12 @@
 
 namespace Scdewt\Hackathon0823\Command;
 
-use Longman\TelegramBot\Commands\Command;
+use Longman\TelegramBot\Commands\UserCommand;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Request;
 
-class StartCommand extends Command
+class StartCommand extends UserCommand
 {
     /**
      * @var string
