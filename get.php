@@ -21,7 +21,7 @@ try {
 
     $data = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-    if (empty($result)) {
+    if (empty($data)) {
         throw new  Exception('Not found team in db');
     }
 
