@@ -34,6 +34,10 @@ class NameCommand extends UserCommand
         $user_id = $message->getFrom()->getId();
         $name    = trim($message->getText(true));
 
+        if (!$name) {
+            $name = $message->getFrom()->getFirstName() . " " . $message->getFrom()->getLastName() ;
+        }
+
         $conn = Connection::getConnection();
 
         $sql = "UPDATE main SET person_name=:person_name where person_id=:person_id";
