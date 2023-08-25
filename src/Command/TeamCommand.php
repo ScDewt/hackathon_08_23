@@ -34,6 +34,14 @@ class TeamCommand extends UserCommand
         $user_id = $message->getFrom()->getId();
         $team    = trim($message->getText(true));
 
+        if (!$team) {
+            $data = ['chat_id' => $chat_id];
+            $data["parse_mode"] = 'Markdown';
+            $data["text"] = "Пожалуйста уточните имя команды. Пример: `/team facebook`";
+
+            return Request::sendMessage($data);
+        }
+
         $conn = Connection::getConnection();
 
         $sql = "UPDATE main SET team=:team where person_id=:person_id";

@@ -47,7 +47,7 @@ class StartCommand extends UserCommand
         }
 
         $data = ['chat_id' => $chat_id];
-        $data['text'] = "Приветствую, " . $name . "!";
+        $data['text'] = "Приветствую, " . $name . "!\nИспользуй /team чтобы присоединитья к команде. Пример: `/team facebook`";
 
         return Request::sendMessage($data);
     }
