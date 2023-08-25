@@ -19,7 +19,7 @@ try {
     $stmt->bindParam(':team', $team);
     $stmt->execute();
 
-    $data = $stmt->fetch(\PDO::FETCH_ASSOC);
+    $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
     if (empty($data)) {
         throw new  Exception('Not found team in db');
