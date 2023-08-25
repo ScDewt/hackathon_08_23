@@ -54,7 +54,7 @@ class TeamCommand extends UserCommand
         }
 
         $data = ['chat_id' => $chat_id];
-        $data["text"] = "Вы приняты в " . $team;
+        $data["text"] = "Вы приняты в " . $team. "\nСсылка на карту https://hackathon0823.scdewt.ru/index.html?team=" . urlencode($team);
 
         return Request::sendMessage($data);
     }
