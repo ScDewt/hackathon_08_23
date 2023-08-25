@@ -1,0 +1,12 @@
+{
+    "name": "scdewt/hackathon_08_23",
+    "type": "project",
+    "require": {
+        "longman/telegram-bot": "^0.81.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Scdewt\\Hackathon0823\\": "src/"
+        }
+    }
+}
