@@ -2,9 +2,17 @@
 
 require "pdo.php";
 
+header('Content-Type: application/json');
+$result = [];
+
 $team = $_GET['team'];
 if (empty($team)) {
-    echo '{error: "team empty"}';
+    $result = [
+        'status' => 'fail',
+        'error' => 'Team is empty',
+    ];
+    echo json_encode($result);
+    return;
 }
 
 $conn = getConnection();
@@ -13,11 +21,9 @@ $sql = "select * from main where team=:team";
 
 $stmt = $conn->prepare($sql);
 $stmt->bindParam(':team', $team);
-//$stmt->bindParam(':name', $name);
-//$stmt->bindParam(':hash', $hash);
-//$stmt->bindParam(':image_url', $imageUrl);
 $stmt->execute();
 
 $result = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-var_dump($result);
+echo json_encode($result);
+return;
