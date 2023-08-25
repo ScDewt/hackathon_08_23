@@ -5,6 +5,7 @@ namespace Scdewt\Hackathon0823\Command;
 use Longman\TelegramBot\Commands\UserCommand;
 use Longman\TelegramBot\Entities\Keyboard;
 use Longman\TelegramBot\Entities\KeyboardButton;
+use Longman\TelegramBot\Entities\Location;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Request;
@@ -37,21 +38,28 @@ class LocationCommand extends UserCommand
 
         $data = ['chat_id' => $chat_id];
 
-        if ($message->getLocation() !== null) {
+        $text = $message->getText(true);
+        $location = $message->getLocation();
+
+        if (preg_match("~^\d+(.\d+)? \d+(.\d+)?$~", $text)) {
+            [$longitude, $latitude] = explode(" ", $text);
+            $location = new Location(["longitude" => $longitude, "latitude" => $latitude]);
+        }
+
+        if ($location !== null) {
             $conn = Connection::getConnection();
             $sql = "UPDATE main SET coords=:coords where person_id=:person_id";
 
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':person_id', $user_id);
             $coords = json_encode([
-                $message->getLocation()->getLongitude(),
-                $message->getLocation()->getLatitude(),
+                $location->getLongitude(),
+                $location->getLatitude(),
             ]);
             $stmt->bindParam(':coords', $coords);
             if (!$stmt->execute()) {
                 TelegramLog::error($stmt->errorInfo()[0]);
             }
-
 
             $data['text'] = 'Ваше местоположение принято';
 
