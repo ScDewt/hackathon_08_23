@@ -32,14 +32,29 @@ sudo apt-get install mysql-server
 sudo mysql
 
 
-mkdir -p /home/dev/hackathon_08_23
-vim dev/hackathon_08_23/index.php
+mkdir -p /home/dev/
+git clone https://github.com/ScDewt/hackathon_08_23.git
+chmod -R 0775 /home/dev
 
 # change config with new dir
 vim /etc/nginx/sites-enabled/default
 service nginx restart
 
-chmod -R 0775 /home/dev
-
 adduser hackathon
 ```
+
+
+- создать бота + прописать вебхук ( с флагами ssl_insecure)
+- бекенд обработка запросов от бота (2 php файла)
+- некоторое хранилизе в БД
+- контроллер на отдачу данных из БД
+- фронтовая часть подключение и отрисовка точек
+- через что рисуем карту? OSM / Yandex
+
+
+- OSM - Алексей смотрит
+- Yandex - Галя + Анастасия
+- Завести бота + прописать - Дима К
+- файл по сохранениею координат - Дима Г
+- Сделать файл по отдаче координат - Дима Ж
+
